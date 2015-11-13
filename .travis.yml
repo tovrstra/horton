@@ -28,7 +28,7 @@ cache:
     # $HOME/depinstall/libxc-2.2.2
 
 install:
- - pip install --upgrade sphinx breathe
+ - pip install --upgrade sphinx breathe pep8 pylint
 
  - bash tools/travis-ci/build_numpy-1.9.1.sh
  - export PYTHONPATH=$HOME/depinstall/numpy-1.9.1/lib/python2.7/site-packages:$PYTHONPATH
@@ -76,3 +76,5 @@ script:
 
 # Run the trapdoor tests
  - python tools/qa/trapdoor_cppcheck.py
+ - python tools/qa/trapdoor_pep8check.py
+ - python tools/qa/trapdoor_pylintcheck.py

@@ -39,10 +39,13 @@ def get_stats_pep8_check():
        messages: Set([]) of strings
                  all errors encountered in the current checkout
     '''
+    # Get version
+
+    # Call Pep8
     pep8check = pep8.StyleGuide(reporter=CompleteReport, max_line_length=100)
-    # pep8 check of horton directory
     pep8check.input_dir('horton')
-    # counts of different errors
+
+    # Parse the output of Pep8 into standard return values
     counters = Counter(pep8check.options.report.counters)
     del counters['physical lines']
     del counters['logical lines']
