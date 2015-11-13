@@ -96,7 +96,7 @@ def run_tests(get_stats):
     subprocess.call(['git', 'checkout', 'master'])
     counter_master, messages_master = get_stats()
     print 'CHECKING OUT %s (%s)' % (name_feature, commit_id_feature)
-    subprocess.call(['git', 'checkout', name_feature])
+    subprocess.call(['git', 'checkout', commit_id_feature])
     return counter_feature, messages_feature, counter_master, messages_master
 
 

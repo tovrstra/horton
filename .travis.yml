@@ -76,5 +76,6 @@ script:
 
 # Run the trapdoor tests
  - python tools/qa/trapdoor_cppcheck.py
+ - git log -5
  - python tools/qa/trapdoor_pep8.py
  - python tools/qa/trapdoor_pylint.py
