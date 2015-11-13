@@ -25,7 +25,7 @@ cache:
     - $HOME/depinstall/h5py-2.2.1
     - $HOME/depinstall/matplotlib-1.1.0
     - $HOME/depinstall/libint-2.0.3
-    # $HOME/depinstall/libxc-2.2.2
+    - $HOME/depinstall/libxc-2.2.2
 
 install:
  - pip install --upgrade sphinx breathe pep8 pylint
@@ -49,9 +49,9 @@ install:
  - |-
    echo "backend : Agg" > ~/.matplotlib/matplotlibrc
 
-# - bash tools/travis-ci/build_libxc-2.2.2.sh
-# - export LD_LIBRARY_PATH=$HOME/depinstall/libxc-2.2.2/lib:$LD_LIBRARY_PATH
-# - export CPATH=$HOME/depinstall/libxc-2.2.2/include:$CPATH
+ - bash tools/travis-ci/build_libxc-2.2.2.sh
+ - export LD_LIBRARY_PATH=$HOME/depinstall/libxc-2.2.2/lib:$LD_LIBRARY_PATH
+ - export CPATH=$HOME/depinstall/libxc-2.2.2/include:$CPATH
 
  - bash tools/travis-ci/build_libint-2.0.3.sh
  - export LD_LIBRARY_PATH=$HOME/depinstall/libint-2.0.3/lib:$LD_LIBRARY_PATH
@@ -62,7 +62,7 @@ install:
 # BLAS_LIBRARIES must be set because Python thinks it is running in Debian
 # wheezy/sid while it is actually running Ubuntu-12.04.
  - export BLAS_LIBRARIES=atlas:cblas
- - (cd depends; make libxc)
+# - (cd depends; make libxc)
  - python setup.py build_ext -i -L ${LD_LIBRARY_PATH}
 
 script:

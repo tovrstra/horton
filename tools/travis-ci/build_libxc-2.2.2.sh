@@ -24,4 +24,4 @@ else
     echo -e "${COLOR}Using Cached LibXC 2.2.2${RESET}"
 fi
 
-find $HOME/depinstall/libxc-2.2.2
+#find $HOME/depinstall/libxc-2.2.2
