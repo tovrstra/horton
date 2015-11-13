@@ -40,9 +40,10 @@ def get_stats_pep8_check():
                  all errors encountered in the current checkout
     '''
     # Get version
+    print 'USING pep8', pep8.__version__
 
     # Call Pep8
-    pep8check = pep8.StyleGuide(reporter=CompleteReport, max_line_length=100)
+    pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='tools/qa/.pep8')
     pep8check.input_dir('horton')
 
     # Parse the output of Pep8 into standard return values
