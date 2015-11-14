@@ -77,5 +77,6 @@ script:
 # Run the trapdoor tests
  - git branch travisci_trapdoor2013
  - python tools/qa/trapdoor_cppcheck.py
+ - mkdir ~/.config
  - python tools/qa/trapdoor_pep8.py
  - python tools/qa/trapdoor_pylint.py

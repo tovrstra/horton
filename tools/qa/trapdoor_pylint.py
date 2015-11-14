@@ -47,7 +47,7 @@ def get_stats_pylint_check():
     print 'USING', subprocess.check_output(command, stderr=subprocess.STDOUT).strip()
 
     # call Pylint
-    command = ['pylint', 'horton', '--rcfile=~/.pylintrc']
+    command = ['pylint', 'horton']
     command_line = ' '.join(command)
     print 'RUNNING', command_line
     proc = subprocess.Popen(command_line, stdout=subprocess.PIPE,
