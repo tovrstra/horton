@@ -25,6 +25,8 @@
 '''
 
 
+import os
+import shutil
 import subprocess
 from collections import Counter
 from trapdoor import main
@@ -45,7 +47,7 @@ def get_stats_pylint_check():
     print 'USING', subprocess.check_output(command, stderr=subprocess.STDOUT).strip()
 
     # call Pylint
-    command = ['pylint', 'horton', '--output-format=parseable', '--report=yes']
+    command = ['pylint', 'horton', '--output-format=parseable', '--report=yes', '--rcfile=~/.pylintrc']
     command_line = ' '.join(command)
     print 'RUNNING', command_line
     proc = subprocess.Popen(command_line, stdout=subprocess.PIPE,
@@ -73,4 +75,5 @@ def get_stats_pylint_check():
 
 
 if __name__ == '__main__':
+    shutil.copy('tools/qa/.pylintrc', os.path.expanduser('~/.pylintrc'))
     main(get_stats_pylint_check)
