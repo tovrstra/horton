@@ -75,6 +75,7 @@ script:
  - ((git rev-parse --verify master &> /dev/null) || (git config remote.origin.fetch refs/heads/*:refs/remotes/origin/*; git fetch origin master --depth=50; git branch master origin/master))
 
 # Run the trapdoor tests
+ - git branch travisci_trapdoor2013
  - python tools/qa/trapdoor_cppcheck.py
  - git log -5
  - python tools/qa/trapdoor_pep8.py
