@@ -24,51 +24,55 @@
    This test calls the pep8 program, see http://pep8.readthedocs.org/.
 '''
 
+import os
 import pep8
+import shutil
 from collections import Counter
 from trapdoor import main
 
 
-class StatsPep8(object):
+# class StatsPep8(object):
+#     '''
+#     '''
+#     def __init__(self):
+#         ''' '''
+#         self.pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='tools/qa/.pep8')
+
+#     def __call__(self):
+
+def get_stats_pep8_check():
+    '''Run tests using pep8
+
+       Returns
+       -------
+       counter: collections.Counter
+                counts for different error types in the current checkout
+       messages: Set([]) of strings
+                 all errors encountered in the current checkout
     '''
-    '''
-    def __init__(self):
-        ''' '''
-        self.pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='tools/qa/.pep8')
+    # # Clear counters and messages of checker
+    # self.pep8check.options.report.reset()
+    # Get version
+    print 'USING pep8', pep8.__version__
 
-    def __call__(self):
-        '''Run tests using pep8
+    # Call Pep8
+    pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='~/.pep8', shell=True)
+    #pep8check = pep8.StyleGuide(reporter=CompleteReport, max_line_length=100)
+    print 'Excluded :', pep8check.options.exclude
+    print 'Ignored  :', pep8check.options.ignore
+    print 'MaxLength:', pep8check.options.max_line_length
+    pep8check.input_dir('horton')
 
-           Returns
-           -------
-           counter: collections.Counter
-                    counts for different error types in the current checkout
-           messages: Set([]) of strings
-                     all errors encountered in the current checkout
-        '''
-        # Clear counters and messages of checker
-        self.pep8check.options.report.reset()
-        # Get version
-        print 'USING pep8', pep8.__version__
-
-        # Call Pep8
-        #pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='tools/qa/.pep8')
-        #pep8check = pep8.StyleGuide(reporter=CompleteReport, max_line_length=100)
-        print 'Excluded :', self.pep8check.options.exclude
-        print 'Ignored  :', self.pep8check.options.ignore
-        print 'MaxLength:', self.pep8check.options.max_line_length
-        self.pep8check.input_dir('horton')
-
-        # Parse the output of Pep8 into standard return values
-        counters = Counter(self.pep8check.options.report.counters)
-        del counters['physical lines']
-        del counters['logical lines']
-        del counters['files']
-        del counters['directories']
-        # message on each error
-        messages = set(self.pep8check.options.report.complete_message)
-        assert len(messages) == self.pep8check.options.report.get_count()
-        return counters, messages
+    # Parse the output of Pep8 into standard return values
+    counters = Counter(pep8check.options.report.counters)
+    del counters['physical lines']
+    del counters['logical lines']
+    del counters['files']
+    del counters['directories']
+    # message on each error
+    messages = set(pep8check.options.report.complete_message)
+    assert len(messages) == pep8check.options.report.get_count()
+    return counters, messages
 
 
 class CompleteReport(pep8.StandardReport):
@@ -95,15 +99,16 @@ class CompleteReport(pep8.StandardReport):
                     line = self.lines[line_number - 1]
             self.complete_message.append(message)
 
-    def reset(self):
-        ''' '''
-        self.elapsed = 0
-        self.total_errors = 0
-        self.counters = dict.fromkeys(self._benchmark_keys, 0)
-        self.messages = {}
-        self.complete_message = []
+    # def reset(self):
+    #     ''' '''
+    #     self.elapsed = 0
+    #     self.total_errors = 0
+    #     self.counters = dict.fromkeys(self._benchmark_keys, 0)
+    #     self.messages = {}
+    #     self.complete_message = []
 
 
 if __name__ == '__main__':
-    get_stats_pep8_check = StatsPep8()
+    shutil.copy('tools/qa/.pep8', os.path.expanduser('~/.pep8'))
+    #get_stats_pep8_check = StatsPep8()
     main(get_stats_pep8_check)
