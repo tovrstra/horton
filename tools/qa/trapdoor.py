@@ -92,10 +92,14 @@ def run_tests(get_stats):
     commit_id_master = subprocess.check_output(['git', 'rev-parse', 'master']).strip()
     # Actual work
     counter_feature, messages_feature = get_stats()
+    for key, value in counter_feature.iteritems():
+        print '%3i   %s' % (value, key)
     print 'CHECKING OUT master (%s)' % (commit_id_master)
     subprocess.call(['git', 'checkout', 'master'])
     try:
         counter_master, messages_master = get_stats()
+        for key, value in counter_master.iteritems():
+            print '%3i   %s' % (value, key)
     finally:
         #print 'CHECKING OUT %s (%s)' % (name_feature, commit_id_feature)
         print 'CHECKING OUT %s (%s)' % ('travisci_trapdoor2013', commit_id_feature)
