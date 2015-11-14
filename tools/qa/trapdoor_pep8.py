@@ -56,7 +56,7 @@ def get_stats_pep8_check():
     print 'USING pep8', pep8.__version__
 
     # Call Pep8
-    pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='~/.pep8')
+    pep8check = pep8.StyleGuide(reporter=CompleteReport)#, config_file='~/.config/pep8')
     #pep8check = pep8.StyleGuide(reporter=CompleteReport, max_line_length=100)
     print 'Excluded :', pep8check.options.exclude
     print 'Ignored  :', pep8check.options.ignore
@@ -109,6 +109,6 @@ class CompleteReport(pep8.StandardReport):
 
 
 if __name__ == '__main__':
-    shutil.copy('tools/qa/.pep8', os.path.expanduser('~/.pep8'))
+    shutil.copy('tools/qa/.pep8', os.path.expanduser('~/.config/pep8'))
     #get_stats_pep8_check = StatsPep8()
     main(get_stats_pep8_check)
