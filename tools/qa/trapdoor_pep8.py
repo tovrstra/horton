@@ -46,6 +46,8 @@ class StatsPep8(object):
            messages: Set([]) of strings
                      all errors encountered in the current checkout
         '''
+        # Clear counters and messages of checker
+        self.pep8check.options.report.reset()
         # Get version
         print 'USING pep8', pep8.__version__
 
@@ -92,6 +94,14 @@ class CompleteReport(pep8.StandardReport):
                 else:
                     line = self.lines[line_number - 1]
             self.complete_message.append(message)
+
+    def reset(self):
+        ''' '''
+        self.elapsed = 0
+        self.total_errors = 0
+        self.counters = dict.fromkeys(self._benchmark_keys, 0)
+        self.messages = {}
+        self.complete_message = []
 
 
 if __name__ == '__main__':
