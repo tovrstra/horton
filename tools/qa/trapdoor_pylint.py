@@ -76,5 +76,5 @@ def get_stats_pylint_check():
 
 if __name__ == '__main__':
     # copy .pylintrc file, so that both branches use the same config
-    shutil.copy('tools/qa/.pylintrc', os.path.expanduser('~/.pylintrc'))
+    shutil.copy('tools/qa/.pylintrc', os.path.expanduser('~/.config/pylintrc'))
     main(get_stats_pylint_check)
