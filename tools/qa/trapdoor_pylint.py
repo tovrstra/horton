@@ -47,7 +47,7 @@ def get_stats_pylint_check():
     print 'USING', subprocess.check_output(command, stderr=subprocess.STDOUT).strip()
 
     # call Pylint
-    command = ['pylint', 'horton', '--output-format=parseable', '--report=yes', '--rcfile=~/.pylintrc']
+    command = ['pylint', 'horton', '--rcfile=~/.pylintrc']
     command_line = ' '.join(command)
     print 'RUNNING', command_line
     proc = subprocess.Popen(command_line, stdout=subprocess.PIPE,
@@ -60,7 +60,7 @@ def get_stats_pylint_check():
     counter = Counter()
     messages = set([])
     for line in lines:
-        # skip certain lines
+        # skip lines that don't contain error messages
         if '.py:' not in line:
             continue
         if line.startswith('Report'):
@@ -75,5 +75,6 @@ def get_stats_pylint_check():
 
 
 if __name__ == '__main__':
+    # copy .pylintrc file, so that both branches use the same config
     shutil.copy('tools/qa/.pylintrc', os.path.expanduser('~/.pylintrc'))
     main(get_stats_pylint_check)
