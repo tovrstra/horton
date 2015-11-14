@@ -56,7 +56,7 @@ def get_stats_pep8_check():
     print 'USING pep8', pep8.__version__
 
     # Call Pep8
-    pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='~/.pep8', shell=True)
+    pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='~/.pep8')
     #pep8check = pep8.StyleGuide(reporter=CompleteReport, max_line_length=100)
     print 'Excluded :', pep8check.options.exclude
     print 'Ignored  :', pep8check.options.ignore
