@@ -43,7 +43,11 @@ def get_stats_pep8_check():
     print 'USING pep8', pep8.__version__
 
     # Call Pep8
-    pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='tools/qa/.pep8')
+    #pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='tools/qa/.pep8')
+    pep8check = pep8.StyleGuide(reporter=CompleteReport, max_line_length=100)
+    print 'Excluded :', pep8check.options.exclude
+    print 'Ignored  :', pep8check.options.ignore
+    print 'MaxLength:', pep8check.options.max_line_length
     pep8check.input_dir('horton')
 
     # Parse the output of Pep8 into standard return values

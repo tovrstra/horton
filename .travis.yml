@@ -67,8 +67,8 @@ install:
 
 script:
 # Run tests as usual and cleanup
- - nosetests -v
- - (cd doc; make html)
+ # nosetests -v
+ # (cd doc; make html)
  - bash cleanfiles.sh
 
 # Get the master branch for a comparative analysis
