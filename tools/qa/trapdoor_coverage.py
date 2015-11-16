@@ -46,28 +46,16 @@ def get_stats_coverage_check():
     '''
     # Get version
     command = ['nosetests', '--version']
-    print 'Using', subprocess.check_output(command, stderr=subprocess.STDOUT).strip()
-    trial_command = ['coverage', 'coverage-2.7', 'coverage27']
-    command = []
-    for i in trial_command:
-        try:
-            subprocess.check_output(i)
-        except:
-            continue
-        else:
-            cover_command = i
-            command = [cover_command, '--version']
-    if command:
-        print 'Using', subprocess.check_output(command, stderr=subprocess.STDOUT).strip()
-    else:
-        print("excutable coverage command not found")
-        return
-    # Call coverage
+    print 'USING', subprocess.check_output(command, stderr=subprocess.STDOUT).strip()
+
+    command = ['coverage', '--version']
+    print 'USING', subprocess.check_output(command, stderr=subprocess.STDOUT).strip()
+
     command = ['nosetests', '--with-coverage', '--cover-erase',
-               '--cover-package=horton.io', 'horton.io']
+               '--cover-package=horton', 'horton']
     print 'RUNNING', ' '.join(command)
     result_str = subprocess.check_output(command, stderr=subprocess.STDOUT)
-    print result_str
+
 
     # Parse the output of Cppcheck into standard return values
     counter = Counter()
