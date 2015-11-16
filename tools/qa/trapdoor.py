@@ -93,7 +93,7 @@ def run_tests(get_stats):
     # Actual work
     counter_feature, messages_feature = get_stats()
     for message in messages_feature:
-        if 'E0611' in message:
+        if 'E0611' in message or 'C0301' in message:
             print message
     for key, value in counter_feature.iteritems():
         print '%3i   %s' % (value, key)
@@ -102,7 +102,7 @@ def run_tests(get_stats):
     try:
         counter_master, messages_master = get_stats()
         for message in messages_master:
-            if 'E0611' in message:
+            if 'E0611' in message or 'C0301' in message:
                 print message
         for key, value in counter_master.iteritems():
             print '%3i   %s' % (value, key)
