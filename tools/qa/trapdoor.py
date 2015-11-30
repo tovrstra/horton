@@ -87,14 +87,13 @@ def run_tests(get_stats):
                          all errors encountered in the master branch
     '''
     # Get git info
-    #name_feature = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip()
     commit_id_feature = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip()
     commit_id_master = subprocess.check_output(['git', 'rev-parse', 'master']).strip()
     # Actual work
     counter_feature, messages_feature = get_stats()
     for message in messages_feature:
         if 'E0611' in message or 'C0301' in message:
-            print message
+            print 'FOUND:', message
     for key, value in counter_feature.iteritems():
         print '%3i   %s' % (value, key)
     print 'CHECKING OUT master (%s)' % (commit_id_master)
@@ -103,13 +102,12 @@ def run_tests(get_stats):
         counter_master, messages_master = get_stats()
         for message in messages_master:
             if 'E0611' in message or 'C0301' in message:
-                print message
+                print 'FOUND:', message
         for key, value in counter_master.iteritems():
-            print '%3i   %s' % (value, key)
+            print '%6i   %s' % (value, key)
     finally:
-        #print 'CHECKING OUT %s (%s)' % (name_feature, commit_id_feature)
-        print 'CHECKING OUT %s (%s)' % ('travisci_trapdoor2013', commit_id_feature)
-        subprocess.call(['git', 'checkout', 'travisci_trapdoor2013'])
+        print 'CHECKING OUT %s (%s)' % ('travisci_trapdoor2015', commit_id_feature)
+        subprocess.call(['git', 'checkout', 'travisci_trapdoor2015'])
     return counter_feature, messages_feature, counter_master, messages_master
 
 

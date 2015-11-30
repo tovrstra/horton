@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, see <http://www.gnu.org/licenses/>
 #
-#--
+# --
 '''Trapdoor test using pep8
 
    This test calls the pep8 program, see http://pep8.readthedocs.org/.
@@ -31,15 +31,6 @@ from collections import Counter
 from trapdoor import main
 
 
-# class StatsPep8(object):
-#     '''
-#     '''
-#     def __init__(self):
-#         ''' '''
-#         self.pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='tools/qa/.pep8')
-
-#     def __call__(self):
-
 def get_stats_pep8_check():
     '''Run tests using pep8
 
@@ -50,14 +41,11 @@ def get_stats_pep8_check():
        messages: Set([]) of strings
                  all errors encountered in the current checkout
     '''
-    # # Clear counters and messages of checker
-    # self.pep8check.options.report.reset()
     # Get version
     print 'USING pep8', pep8.__version__
 
-    # Call Pep8
-    pep8check = pep8.StyleGuide(reporter=CompleteReport)#, config_file='~/.config/pep8')
-    #pep8check = pep8.StyleGuide(reporter=CompleteReport, max_line_length=100)
+    # Call Pep8 (it should load the ~/.config/pep8 configuration file)
+    pep8check = pep8.StyleGuide(reporter=CompleteReport, config_file='~/.config/pep8')
     print 'Excluded :', pep8check.options.exclude
     print 'Ignored  :', pep8check.options.ignore
     print 'MaxLength:', pep8check.options.max_line_length
@@ -69,7 +57,7 @@ def get_stats_pep8_check():
     del counters['logical lines']
     del counters['files']
     del counters['directories']
-    # message on each error
+    # Message on each error
     messages = set(pep8check.options.report.complete_message)
     assert len(messages) == pep8check.options.report.get_count()
     return counters, messages
@@ -99,16 +87,8 @@ class CompleteReport(pep8.StandardReport):
                     line = self.lines[line_number - 1]
             self.complete_message.append(message)
 
-    # def reset(self):
-    #     ''' '''
-    #     self.elapsed = 0
-    #     self.total_errors = 0
-    #     self.counters = dict.fromkeys(self._benchmark_keys, 0)
-    #     self.messages = {}
-    #     self.complete_message = []
-
 
 if __name__ == '__main__':
+    # Copy .pep8 file, so that both branches use the same config
     shutil.copy('tools/qa/.pep8', os.path.expanduser('~/.config/pep8'))
-    #get_stats_pep8_check = StatsPep8()
     main(get_stats_pep8_check)
