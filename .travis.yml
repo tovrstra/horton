@@ -67,7 +67,7 @@ install:
 
 script:
 # Run tests as usual and cleanup
- - nosetests -v
+ # nosetests -v
  # (cd doc; make html)
  - bash cleanfiles.sh
 
