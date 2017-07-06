@@ -487,5 +487,5 @@ setup(
         'Programming Language :: Cython',
         'Programming Language :: C++',
         'Topic :: Science/Engineering :: Molecular Science'
-    ],
+    ], requires=['numpy', 'nose']
 )
